@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from catalog.views import CatalogView
+from catalog.views import CatalogView, ProductView
 
 urlpatterns = [
     url(r'^$', CatalogView.as_view(), name='home'),
+    url(r'^products/new', ProductView.as_view(), name='productView'),
     url(r'^admin/', include(admin.site.urls)),
 ]

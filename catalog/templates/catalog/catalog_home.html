@@ -1,5 +1,9 @@
+{% load humanize %}
+<a href='/products/new'>New Product</a>
 <h1>DDD Shop - Python</h1>
 
 {% for p in products %}
     <h2>{{ p.name }}<h2>
+    <h3>{{ p.description }}</h3>
+    <h3>{{ p.price|intcomma }}</h3>
 {% endfor %}

@@ -1,0 +1,17 @@
+<h3> New Product </h3>
+
+<form action="/products/new" method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    <label for="name">Name: </label>
+    <input id="name" type="text" name="name" maxlength="100">
+
+    <label for="description">Description: </label>
+    <input id="description" type="text" name="description" maxlength="200">
+
+    <label for="price">Price U$: </label>
+    <input id="price" type="text" name="price" maxlength="8">
+
+    <input type="submit" value="Submit" />
+</form>
