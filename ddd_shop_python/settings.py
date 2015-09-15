@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'catalog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,6 +68,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'ddd_shop_python.wsgi.application'
 
