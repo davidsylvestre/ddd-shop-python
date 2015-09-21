@@ -5,9 +5,9 @@ from decimal import Decimal
 
 from catalog.domain.entities.product import Product
 from catalog.domain.entities.order import Order
+from catalog.domain.entities.client import Client
 from catalog.domain.repositories.product_repository import ProductRepository
 from catalog.domain.repositories.order_repository import OrderRepository
-from catalog.domain.repositories.client_repository import ClientRepository
 
 
 class OrderView(View):
@@ -20,20 +20,14 @@ class OrderView(View):
     def post(self, request):
 
         # INFRA
-        # client_id = request.POST['client_id']
-        client_id = 1  # TODO: request.user.is_authenticated():
-        client_repository = ClientRepository()
-        client = client_repository.get(client_id)
+        client = Client(129182942, 'Joao', 'Silva')
 
-        product_id = request.POST['product_id']
-        product_repository = ProductRepository()
-        product = product_repository.get(product_id)
+        product = ProductRepository().get(request.POST['product_id'])
 
         # DOMAIN
         order = Order(product, client)
 
-        repository = OrderRepository()
-        repository.save(order)
+        OrderRepository().save(order)
 
         return render(request, 'order/done.html')
 

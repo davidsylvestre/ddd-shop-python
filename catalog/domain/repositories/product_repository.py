@@ -12,7 +12,7 @@ class ProductRepository(object):
 
     def get(self, id):
         # product_data = Product_data.objects.get(id)
-        product = Product(name='Fake', description='Fake', price=10)
+        product = Product(name='Fake', description='Fake', price=11)
         product.id = 1
         return product
 
