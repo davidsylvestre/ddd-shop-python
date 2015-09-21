@@ -6,4 +6,12 @@
     <h2>{{ p.name }}<h2>
     <h3>{{ p.description }}</h3>
     <h3>{{ p.price|intcomma }}</h3>
+
+
+    <form action="/order/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type='hidden' value='{{ p.id }}' name='product_id' id='product_id' />
+        <input type='submit' value='Compra' />
+    </form>
 {% endfor %}

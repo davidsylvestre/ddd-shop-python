@@ -10,6 +10,12 @@ class ProductRepository(object):
         self.mapper = ObjectMapper()
         self.mapper.create_map(Product, ProductData)
 
+    def get(self, id):
+        # product_data = Product_data.objects.get(id)
+        product = Product(name='Fake', description='Fake', price=10)
+        product.id = 1
+        return product
+
     def save(self, product):
         product_data = self.mapper.map(product, ProductData)
         product_data.save()
