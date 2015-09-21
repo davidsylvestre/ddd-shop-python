@@ -10,6 +10,9 @@ class OrderRepository(object):
         self.mapper = ObjectMapper()
         self.mapper.create_map(Order, OrderData)
 
+    def all(self):
+        return OrderData.objects.all()
+
     def save(self, order):
         order_data = self.mapper.map(order, OrderData)
         order_data.save()

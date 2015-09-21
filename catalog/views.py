@@ -12,6 +12,11 @@ from catalog.domain.repositories.client_repository import ClientRepository
 
 class OrderView(View):
 
+    def get(self, request):
+        repository = OrderRepository()
+        orders = repository.all()
+        return render(request, 'order/list.html', {'orders': orders})
+
     def post(self, request):
 
         # INFRA
