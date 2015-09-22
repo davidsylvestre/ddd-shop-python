@@ -1,13 +1,16 @@
+from decimal import Decimal
+
 from django.views.generic import View
 from django.shortcuts import render
 
-from decimal import Decimal
+from ddd_shop_python.libs.domain_event import DomainEvents
 
 from catalog.domain.entities.product import Product
 from catalog.domain.entities.order import Order
 from catalog.domain.entities.client import Client
 from catalog.domain.repositories.product_repository import ProductRepository
 from catalog.domain.repositories.order_repository import OrderRepository
+from catalog.domain.events.order_completed import OrderCompleted
 
 
 class OrderView(View):
@@ -28,6 +31,8 @@ class OrderView(View):
         order = Order(product, client)
 
         OrderRepository().save(order)
+
+        DomainEvents.trigger(OrderCompleted(order))
 
         return render(request, 'order/done.html')
 
