@@ -6,11 +6,10 @@ from django.shortcuts import render
 from ddd_shop_python.libs.domain_event import DomainEvents
 
 from catalog.domain.entities.product import Product
-from catalog.domain.entities.order import Order
-from catalog.domain.entities.client import Client
-from catalog.domain.repositories.product_repository import ProductRepository
 from catalog.domain.repositories.order_repository import OrderRepository
+from catalog.domain.repositories.product_repository import ProductRepository
 from catalog.domain.events.order_completed import OrderCompleted
+from catalog.domain.factories.order_factory import OrderFactory
 
 
 class OrderView(View):
@@ -22,17 +21,12 @@ class OrderView(View):
 
     def post(self, request):
 
-        # INFRA
-        client = Client(129182942, 'Joao', 'Silva')
+        client_id = 1  # FAKE
+        product_id = request.POST['product_id']
 
-        product = ProductRepository().get(request.POST['product_id'])
-
-        # DOMAIN
-        order = Order(product, client)
+        order = OrderFactory.create(client_id, product_id)
 
         OrderRepository().save(order)
-
-        DomainEvents.trigger(OrderCompleted(order))
 
         return render(request, 'order/done.html')
 
